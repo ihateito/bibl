@@ -1,55 +1,8 @@
 
-{% block title %}Библиотека{% endblock %}
-
 {% block body %}
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
     <script src="{{ asset('build/manifest.js') }}"></script>
     <script src="{{ asset('build/vendor.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
     <div id="jsGrid"></div>
-    <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-    <form method="post" action="/">
-        <p>Название<input  name="name" value="Книга">
-            Автор<input  name="author" value="Некто">
-            Год<input  name="year" value="2018">
-            Описание<input  name="discription" value="Просто книга">
-            ISBN<input  name="isbn" value="8814">
-            Аннотация<input  name="annotation" value="Тестовая книга">
-        <p><input type="submit" value="Добавить"></p>
-    </form>
-<form method="post" action="/delete">
-    <input type="submit" value="Удалить"></p>
-<table border="1">
-    <caption>Книги</caption>
-    <tr>
-        <th></th>
-        <th>№</th>
-        <th>Название</th>
-        <th>Автор</th>
-        <th>Год</th>
-        <th>Описание</th>
-        <th>ISBN</th>
-        <th>Аннотация</th>
-    </tr>
-    {% set num = 1 %}
-    {% for note in books %}
-        <tr>
-            <td>
-                <input name="delete[]" type="checkbox" value="{{ note.id }}">
-            </td>
-            <td>{{ num }}</td>
-            <td>{{ note.name }}</td>
-            <td>{{ note.author }}</td>
-            <td>{{ note.year }}</td>
-            <td>{{ note.discription }}</td>
-            <td>{{ note.isbn }}</td>
-            <td>{{ note.annotation }}</td>
-        </tr>
-        {% set num = num + 1 %}
-    {% endfor %}
-</table>
-</form>
 {% endblock %}
