@@ -19,22 +19,26 @@ class BooksRepository extends ServiceEntityRepository
         parent::__construct($registry, Books::class);
     }
 
-//    /**
-//     * @return Books[] Returns an array of Books objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function getFilteredData(array $filters)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $sql = 'SELECT * FROM books b
+                WHERE TRUE ';
+
+        foreach ($filters as $key => $value) {
+            if ($value) {
+                $sql .= 'AND b.' . $key . ' ~ :' . $key;
+            } else {
+                unset($filters[$key]);
+            }
+        }
+        $conn = $this->getEntityManager()->getConnection();
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($filters);
+
+        return $stmt->fetchAll();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Books

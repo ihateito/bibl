@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Books;
-use App\Repository\BooksRepository;
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,9 +34,8 @@ class BiblController extends Controller
      * @Route("/load", name="load")
      */
     public function loadAction() {
-
         return $this->json($this->getDoctrine()
-            ->getRepository(Books::class)->findAll(),200);
+            ->getRepository(Books::class)->getFilteredData($_REQUEST),200);
     }
 
     /**

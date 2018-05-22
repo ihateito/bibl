@@ -5,6 +5,7 @@ $(function () {
         height: '100%',
         autoload: true,
 
+        filtering: true,
         inserting: true,
         editing: true,
         sorting: true,
@@ -68,7 +69,7 @@ $(function () {
                 name: 'year',
                 type: 'text',
                 title: 'Год',
-                width: 200,
+                width: 30,
             },
             {
                 name: 'discription',
@@ -88,6 +89,7 @@ $(function () {
                 type: 'textarea',
                 title: 'Аннотация',
                 sorting: false,
+                width: 200
             },
             {
                 type: 'control'
