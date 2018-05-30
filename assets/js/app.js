@@ -33,8 +33,9 @@ $(function () {
             updateItem: function(item) {
                 return $.ajax({
                     type: "PUT",
-                    url: "/items",
-                    data: item
+                    url: "/update",
+                    data: item,
+                    dataType: "json"
                 });
             },
     

@@ -54,13 +54,49 @@ class BiblController extends Controller
         $book->setIsbn($rawData['isbn']);
         $book->setYear($rawData['year']);
         $book->setAnnotation($rawData['annotation']);
-        if (empty($validator->validate($book))) {
+        if (empty($validator->validate($book)->count())) {
             $entityManager->persist($book);
             $entityManager->flush();
             return $this->json($book, 200);
         } else {
             return $this->json([], 400);
         }
+    }
+
+    /**
+     * @Route("/update", name="update")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function updateAction(Request $request, ValidatorInterface $validator) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $rawData = $request->request->all();
+        if (isset($rawData['id'])) {
+            $book = $entityManager->getRepository(Books::class)->find($rawData['id']);
+            if (!empty($rawData['name'])) {
+                $book->setName($rawData['name']);
+            }
+            if (!empty($rawData['author'])) {
+                $book->setAuthor($rawData['author']);
+            }if (!empty($rawData['discription'])) {
+                $book->setDiscription($rawData['discription']);
+            }if (!empty($rawData['isbn'])) {
+                $book->setIsbn($rawData['isbn']);
+            }if (!empty($rawData['year'])) {
+                $book->setYear($rawData['year']);
+            }if (!empty($rawData['annotation'])) {
+                $book->setAnnotation($rawData['annotation']);
+            }
+            if (empty($validator->validate($book)->count())) {
+                $entityManager->persist($book);
+                $entityManager->flush();
+                return $this->json($book, 200);
+            } else {
+                return $this->json([], 400);
+            }
+        }
+        return $this->json([], 404);
     }
 
     /**
